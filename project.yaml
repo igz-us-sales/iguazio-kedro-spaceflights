@@ -1,0 +1,29 @@
+kind: project
+metadata:
+  name: kedro-spaceflights
+  created: '2022-10-25T18:55:30.593000'
+spec:
+  functions:
+  - url: src/spaceflights/pipelines/data_processing/nodes.py
+    name: data
+    kind: job
+    image: mlrun/mlrun
+  - url: src/spaceflights/pipelines/data_processing/nodes.py
+    name: dp
+    kind: job
+    image: mlrun/mlrun
+  - url: src/spaceflights/pipelines/data_science/nodes.py
+    name: ds
+    kind: job
+    image: mlrun/mlrun
+  - url: hub://v2_model_server
+    name: serving
+  workflows:
+  - path: pipeline.py
+    name: data_pipeline
+  artifacts: []
+  source: ''
+  desired_state: online
+  owner: nick
+status:
+  state: online
